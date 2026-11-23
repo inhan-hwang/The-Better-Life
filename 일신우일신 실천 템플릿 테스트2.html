@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F7F6F2">
+<title>日新又日新 | 나의 삶의 원칙과 매일 회고</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F2;
+    --surface: #FFFFFF;
+    --surface-subtle: #F0EFEA;
+    --ink: #111312;
+    --ink-secondary: #525754;
+    --ink-muted: #8A8F8C;
+    --border: #E4E2DA;
+    --border-strong: #CFCBC0;
+    --sage: #2F4F43;
+    --sage-light: #E8EFEA;
+    --amber: #9C7A3C;
+    --amber-light: #F7F1E5;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --shadow-sm: 0 2px 10px rgba(17, 19, 18, 0.03);
+    --shadow-md: 0 12px 32px rgba(17, 19, 18, 0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 36px 24px 80px;
+  }
+
+  /* Top Navigation / Header */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .brand-hanja {
+    font-family: "Noto Serif KR", serif;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .brand-sub {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    letter-spacing: 0.04em;
+  }
+  .top-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  .btn:hover {
+    background: var(--surface-subtle);
+    transform: translateY(-1px);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-color: var(--ink);
+  }
+  .btn-primary:hover {
+    background: #2A2E2C;
+    border-color: #2A2E2C;
+  }
+  .btn-sage {
+    background: var(--sage);
+    color: #FFFFFF;
+    border-color: var(--sage);
+  }
+  .btn-sage:hover {
+    background: #233D33;
+  }
+
+  /* Hero Editorial Banner */
+  .hero-bento {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 18px;
+  }
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 34px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: "Noto Serif KR", serif;
+    font-size: clamp(22px, 3vw, 29px);
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero-desc {
+    font-size: 14px;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+
+  /* Status & Progress Card */
+  .status-card {
+    background: var(--ink);
+    color: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .status-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .date-picker-wrap input[type="date"] {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+  }
+  .date-picker-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+  .progress-display {
+    margin: 22px 0 14px;
+  }
+  .progress-num {
+    font-family: "Noto Serif KR", serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .progress-num span {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    font-family: inherit;
+  }
+  .progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #8EB8A5;
+    border-radius: 999px;
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .status-foot {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Section Headers */
+  .section-head {
+    margin: 44px 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .section-head h2 {
+    font-family: "Noto Serif KR", serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 4px 0 0;
+  }
+  .section-head p {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+
+  /* 5 Practices Bento Grid */
+  .practices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .practice-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease;
+  }
+  .practice-card:hover {
+    border-color: var(--border-strong);
+  }
+  .practice-card.wide {
+    grid-column: span 2;
+  }
+  .practice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--surface-subtle);
+  }
+  .practice-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--sage);
+    background: var(--sage-light);
+    padding: 3px 9px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+  }
+  .practice-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .practice-sub {
+    font-size: 12.5px;
+    color: var(--ink-secondary);
+    margin: 3px 0 0;
+  }
+  .practice-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-muted);
+  }
+
+  /* Checklist Items */
+  .checklist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .practice-card.wide .checklist {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 18px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 9px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+  .check-item:hover {
+    background: var(--surface-subtle);
+  }
+  .check-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 5px;
+    margin-top: 2px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s ease;
+    background: #fff;
+  }
+  .check-item input[type="checkbox"]:checked {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .check-item input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .check-item.checked span {
+    color: var(--ink-muted);
+    text-decoration: line-through;
+  }
+
+  /* 3-Minute Daily Reflection Form */
+  .reflection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .q-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .q-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--amber-light);
+    color: var(--amber);
+  }
+  .q-card textarea {
+    width: 100%;
+    min-height: 78px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .q-card textarea:focus {
+    border-color: var(--sage);
+    background: var(--surface);
+  }
+  .q-card textarea::placeholder {
+    color: var(--ink-muted);
+    font-size: 13px;
+  }
+
+  .action-bar {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* History Log */
+  .history-list {
+    display: grid;
+    gap: 12px;
+  }
+  .history-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .history-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .history-date {
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .history-score {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--sage-light);
+    color: var(--sage);
+  }
+  .history-preview {
+    font-size: 13.5px;
+    color: var(--ink-secondary);
+    margin: 0;
+  }
+  .history-btns {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-sm {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Principles Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 19, 18, 0.55);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  .modal-backdrop.open {
+    display: flex;
+  }
+  .modal-box {
+    background: var(--surface);
+    border-radius: 24px;
+    max-width: 640px;
+    width: 100%;
+    padding: 34px 36px;
+    box-shadow: var(--shadow-md);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
+  .modal-head h3 {
+    font-family: "Noto Serif KR", serif;
+    font-size: 24px;
+    margin: 4px 0 0;
+  }
+  .principle-list {
+    display: grid;
+    gap: 12px;
+  }
+  .principle-row {
+    padding: 16px 18px;
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    border: 1px solid var(--border);
+  }
+  .principle-row strong {
+    display: block;
+    font-size: 15.5px;
+    color: var(--sage);
+    margin-bottom: 4px;
+  }
+  .principle-row span {
+    font-size: 13.5px;
+    color: var(--ink-secondary);
+  }
+  .modal-quote {
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    background: var(--ink);
+    color: #fff;
+    text-align: center;
+    font-family: "Noto Serif KR", serif;
+    font-size: 17px;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: all 0.25s ease;
+    z-index: 200;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .hero-bento { grid-template-columns: 1fr; }
+    .practices-grid { grid-template-columns: 1fr; }
+    .practice-card.wide { grid-column: auto; }
+    .practice-card.wide .checklist { grid-template-columns: 1fr; }
+    .reflection-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-hanja">日新又日新</span>
+      <span class="brand-sub">일신우일신 · 날마다 새롭게, 또 날마다 새롭게</span>
+    </div>
+    <div class="top-actions">
+      <button class="btn" id="openPrinciplesBtn">나의 5대 삶의 원칙</button>
+      <button class="btn btn-primary" id="copyMdBtn">노션·메모장 복사</button>
+    </div>
+  </header>
+
+  <!-- Hero Bento -->
+  <section class="hero-bento">
+    <div class="hero-card">
+      <div>
+        <div class="kicker">PERSONAL PHILOSOPHY & DAILY PRACTICE</div>
+        <h1 class="hero-title">어제보다 나은 오늘을 만들고,<br>오늘의 삶도 온전히 누리자.</h1>
+      </div>
+      <p class="hero-desc">더 나은 삶은 어느 날 갑자기 완성되는 목적지가 아니다. 매일 배우고, 성장하고, 사랑하며 만들어 가는 과정이다.</p>
+    </div>
+
+    <div class="status-card">
+      <div class="status-top">
+        <span style="font-size:12px; letter-spacing:0.12em; color:rgba(255,255,255,0.7); font-weight:600;">TODAY'S CHECK-IN</span>
+        <div class="date-picker-wrap">
+          <input type="date" id="targetDate">
+        </div>
+      </div>
+      <div class="progress-display">
+        <div class="progress-num" id="progressText">0<span> / 20 실천 완료</span></div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+      </div>
+      <div class="status-foot">
+        <span id="progressPercent">달성률 0%</span>
+        <span id="streakText">누적 기록 0일</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Daily Practices -->
+  <div class="section-head">
+    <div>
+      <div class="kicker" style="margin-bottom:2px;">FIVE DAILY PRACTICES</div>
+      <h2>더 나은 삶을 위한 다섯 가지 실천</h2>
+    </div>
+    <p>완벽하게 해내려 하기보다, 매일 작게 실천하고 오래 지속합니다.</p>
+  </div>
+
+  <section class="practices-grid" id="practicesContainer"></section>
+
+  <!-- 3-Minute Reflection -->
+  <div class="section-head">
+    <div>
+      <div class="kicker" style="margin-bottom:2px;">THREE-MINUTE REFLECTION</div>
+      <h2>하루 3분, 나에게 묻기</h2>
+    </div>
+    <p>오늘을 정리하고 내일의 가장 작은 변화를 기록합니다.</p>
+  </div>
+
+  <section class="reflection-grid">
+    <div class="q-card">
+      <div class="q-label"><span class="q-badge">01 · 배움</span> 오늘 나는 무엇을 새롭게 알게 되었나?</div>
+      <textarea id="qLearn" placeholder="책에서 읽은 문장, 업무 중 얻은 인사이트, 새롭게 깨달은 관점을 한 줄로 적어보세요."></textarea>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><span class="q-badge">02 · 성장</span> 오늘 나는 어떤 점에서 조금 나아졌나?</div>
+      <textarea id="qGrow" placeholder="어제보다 나은 판단, 감정 조절, 꾸준히 지켜낸 작은 습관을 기록해 보세요."></textarea>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><span class="q-badge">03 · 감사</span> 오늘 내 삶에서 고맙고 좋았던 순간은 무엇인가?</div>
+      <textarea id="qThanks" placeholder="가족과의 대화, 따뜻한 식사, 무사히 마친 하루 등 고마웠던 장면을 떠올려 보세요."></textarea>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><span class="q-badge">04 · 내일</span> 내일 실천할 가장 작은 한 가지는 무엇인가?</div>
+      <textarea id="qTomorrow" placeholder="내일 당장 실행할 수 있는 가장 작고 구체적인 행동 하나를 정해 보세요."></textarea>
+    </div>
+  </section>
+
+  <div class="action-bar">
+    <button class="btn" id="resetTodayBtn">오늘 입력 초기화</button>
+    <button class="btn btn-sage" id="saveRecordBtn">오늘의 실천·회고 저장하기</button>
+  </div>
+
+  <!-- Saved History -->
+  <div class="section-head">
+    <div>
+      <div class="kicker" style="margin-bottom:2px;">ARCHIVE</div>
+      <h2>나의 일신우일신 기록첩</h2>
+    </div>
+    <p id="archiveCount">저장된 기록이 없습니다.</p>
+  </div>
+  <section class="history-list" id="historyContainer"></section>
+</div>
+
+<!-- 5 Principles Modal -->
+<div class="modal-backdrop" id="principlesModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="kicker">MY FIVE PRINCIPLES</div>
+        <h3>내가 지키고 싶은 삶의 원칙</h3>
+      </div>
+      <button class="btn btn-sm" id="closePrinciplesBtn">닫기</button>
+    </div>
+    <div class="principle-list">
+      <div class="principle-row">
+        <strong>1. 배움에는 겸손하고</strong>
+        <span>끊임없이 배우며 새로운 생각과 가능성을 받아들인다.</span>
+      </div>
+      <div class="principle-row">
+        <strong>2. 성장에는 꾸준하며</strong>
+        <span>남과 비교하지 않고 어제의 나보다 나은 사람이 되기 위해 노력한다.</span>
+      </div>
+      <div class="principle-row">
+        <strong>3. 사람에게는 따뜻하고</strong>
+        <span>나의 성장만큼 주변 사람들의 행복과 소중한 관계를 중요하게 생각한다.</span>
+      </div>
+      <div class="principle-row">
+        <strong>4. 삶에는 감사하며</strong>
+        <span>지금 주어진 일상과 소중한 순간들의 가치를 잊지 않는다.</span>
+      </div>
+      <div class="principle-row">
+        <strong>5. 내일은 오늘보다 나은 사람이 되자</strong>
+        <span>어제에 머무르지 않고 매일 조금씩 더 나은 방향으로 나아간다.</span>
+      </div>
+    </div>
+    <div class="modal-quote">
+      “오늘을 충실히 살고, 내일을 더 나은 모습으로 맞이하자.”
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">저장되었습니다.</div>
+
+<script>
+  const PRACTICES = [
+    {
+      id: "learn",
+      code: "01 · 學",
+      title: "매일 조금씩 배우기",
+      sub: "어제 몰랐던 것을 오늘 하나라도 새롭게 알게 되는 삶",
+      items: [
+        "하루 10~20분 독서하거나 공부하기",
+        "새로운 분야와 관점에 호기심 갖기",
+        "모르는 것을 그냥 지나치지 않기",
+        "다른 사람의 생각을 열린 마음으로 듣기"
+      ]
+    },
+    {
+      id: "care",
+      code: "02 · 修",
+      title: "몸과 마음을 돌보기",
+      sub: "나를 잘 돌보는 것이 모든 성장의 출발점이다",
+      items: [
+        "꾸준히 움직이고 충분히 잠자기",
+        "감정적으로 반응하기 전에 한 번 더 생각하기",
+        "몸과 마음의 신호를 살피기",
+        "스스로에게 지나치게 엄격하지 않기"
+      ]
+    },
+    {
+      id: "love",
+      code: "03 · 愛",
+      title: "사람에게 따뜻하기",
+      sub: "나의 성장만큼 주변 사람들의 행복도 소중히 여긴다",
+      items: [
+        "가족과 가까운 사람에게 다정하게 대하기",
+        "상대의 이야기를 끝까지 듣기",
+        "작은 약속도 소중히 지키기",
+        "주변에 좋은 영향을 주는 사람이 되기"
+      ]
+    },
+    {
+      id: "grow",
+      code: "04 · 進",
+      title: "어제의 나보다 나아지기",
+      sub: "남과 비교하지 않고 나만의 속도로 꾸준히 나아간다",
+      items: [
+        "어제보다 나은 판단을 했는지 돌아보기",
+        "작은 목표를 정하고 하나씩 실천하기",
+        "실수에서 배우고 다시 시도하기",
+        "성취의 크기보다 꾸준함을 중요하게 여기기"
+      ]
+    },
+    {
+      id: "reflect",
+      code: "05 · 省",
+      title: "매일 자신을 돌아보기",
+      sub: "하루를 정리하고 내일의 작은 변화를 준비한다",
+      wide: true,
+      items: [
+        "오늘 새롭게 배우거나 깨달은 것은 무엇인가?",
+        "오늘 어제보다 잘한 것은 무엇인가?",
+        "내일 조금 더 나아지기 위해 바꿀 것은 무엇인가?",
+        "오늘 감사했던 순간 한 가지 떠올리기"
+      ]
+    }
+  ];
+
+  const STORAGE_KEY = "ilshin_personal_philosophy_v1";
+  const dateInput = document.getElementById("targetDate");
+  const practicesContainer = document.getElementById("practicesContainer");
+
+  function getTodayStr() {
+    const now = new Date();
+    const offset = now.getTimezoneOffset() * 60000;
+    return new Date(now - offset).toISOString().slice(0, 10);
+  }
+
+  function loadAllRecords() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch {
+      return {};
+    }
+  }
+
+  function saveAllRecords(records) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  function renderPractices() {
+    practicesContainer.innerHTML = PRACTICES.map(p => `
+      <article class="practice-card ${p.wide ? 'wide' : ''}" data-group="${p.id}">
+        <div class="practice-header">
+          <div>
+            <span class="practice-tag">${p.code}</span>
+            <h3 class="practice-title">${p.title}</h3>
+            <p class="practice-sub">${p.sub}</p>
+          </div>
+          <span class="practice-count" id="count-${p.id}">0/4</span>
+        </div>
+        <ul class="checklist">
+          ${p.items.map((text, idx) => {
+            const key = `${p.id}_${idx}`;
+            return `
+              <li>
+                <label class="check-item" id="label-${key}">
+                  <input type="checkbox" data-key="${key}">
+                  <span>${text}</span>
+                </label>
+              </li>
+            `;
+          }).join("")}
+        </ul>
+      </article>
+    `).join("");
+
+    practicesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener("change", () => {
+        cb.closest(".check-item").classList.toggle("checked", cb.checked);
+        updateProgress();
+      });
+    });
+  }
+
+  function updateProgress() {
+    const allCbs = [...practicesContainer.querySelectorAll('input[type="checkbox"]')];
+    const checkedCount = allCbs.filter(cb => cb.checked).length;
+    const total = allCbs.length;
+    const pct = Math.round((checkedCount / total) * 100);
+
+    document.getElementById("progressText").innerHTML = `${checkedCount}<span> / ${total} 실천 완료</span>`;
+    document.getElementById("progressBar").style.width = `${pct}%`;
+    document.getElementById("progressPercent").textContent = `달성률 ${pct}%`;
+
+    PRACTICES.forEach(p => {
+      const groupCbs = [...practicesContainer.querySelectorAll(`input[data-key^="${p.id}_"]`)];
+      const done = groupCbs.filter(c => c.checked).length;
+      document.getElementById(`count-${p.id}`).textContent = `${done}/${groupCbs.length}`;
+    });
+  }
+
+  function loadDateData(dateStr) {
+    const records = loadAllRecords();
+    const data = records[dateStr] || { checks: {}, qLearn: "", qGrow: "", qThanks: "", qTomorrow: "" };
+
+    practicesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      const val = Boolean(data.checks && data.checks[cb.dataset.key]);
+      cb.checked = val;
+      cb.closest(".check-item").classList.toggle("checked", val);
+    });
+
+    document.getElementById("qLearn").value = data.qLearn || "";
+    document.getElementById("qGrow").value = data.qGrow || "";
+    document.getElementById("qThanks").value = data.qThanks || "";
+    document.getElementById("qTomorrow").value = data.qTomorrow || "";
+    updateProgress();
+  }
+
+  function saveCurrentDate() {
+    const dateStr = dateInput.value;
+    if (!dateStr) return;
+
+    const checks = {};
+    let checkedCount = 0;
+    practicesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      checks[cb.dataset.key] = cb.checked;
+      if (cb.checked) checkedCount++;
+    });
+
+    const records = loadAllRecords();
+    records[dateStr] = {
+      checks,
+      checkedCount,
+      qLearn: document.getElementById("qLearn").value.trim(),
+      qGrow: document.getElementById("qGrow").value.trim(),
+      qThanks: document.getElementById("qThanks").value.trim(),
+      qTomorrow: document.getElementById("qTomorrow").value.trim(),
+      updatedAt: new Date().toISOString()
+    };
+
+    saveAllRecords(records);
+    renderHistory();
+    showToast(`${dateStr} 기록이 저장되었습니다.`);
+  }
+
+  function renderHistory() {
+    const records = loadAllRecords();
+    const dates = Object.keys(records).sort((a, b) => b.localeCompare(a));
+    document.getElementById("streakText").textContent = `누적 기록 ${dates.length}일`;
+    document.getElementById("archiveCount").textContent = dates.length
+      ? `총 ${dates.length}일의 일신우일신 기록이 보관되어 있습니다.`
+      : "저장된 기록이 없습니다.";
+
+    const container = document.getElementById("historyContainer");
+    if (!dates.length) {
+      container.innerHTML = `<div class="history-item" style="color:var(--ink-muted); font-size:13.5px;">아직 저장된 회고가 없습니다. 오늘의 실천을 체크하고 첫 기록을 남겨보세요.</div>`;
+      return;
+    }
+
+    container.innerHTML = dates.map(d => {
+      const r = records[d];
+      const summary = r.qLearn || r.qGrow || r.qThanks || r.qTomorrow || "체크리스트 실천 기록";
+      return `
+        <div class="history-item">
+          <div>
+            <div class="history-meta">
+              <span class="history-date">${d}</span>
+              <span class="history-score">실천 ${r.checkedCount || 0} / 20</span>
+            </div>
+            <p class="history-preview">${escapeHtml(summary)}</p>
+          </div>
+          <div class="history-btns">
+            <button class="btn btn-sm" onclick="selectHistoryDate('${d}')">불러오기</button>
+            <button class="btn btn-sm" onclick="deleteHistoryDate('${d}')">삭제</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+  }
+
+  window.selectHistoryDate = function(d) {
+    dateInput.value = d;
+    loadDateData(d);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    showToast(`${d} 기록을 불러왔습니다.`);
+  };
+
+  window.deleteHistoryDate = function(d) {
+    const records = loadAllRecords();
+    delete records[d];
+    saveAllRecords(records);
+    renderHistory();
+    if (dateInput.value === d) loadDateData(d);
+    showToast(`${d} 기록이 삭제되었습니다.`);
+  };
+
+  document.getElementById("copyMdBtn").addEventListener("click", () => {
+    const d = dateInput.value;
+    const allCbs = [...practicesContainer.querySelectorAll('input[type="checkbox"]')];
+    const doneCount = allCbs.filter(c => c.checked).length;
+
+    let md = `### 日新又日新 일일 회고 (${d}) · 실천 ${doneCount}/20\n\n`;
+    md += `- **배움:** ${document.getElementById("qLearn").value.trim() || "-"}\n`;
+    md += `- **성장:** ${document.getElementById("qGrow").value.trim() || "-"}\n`;
+    md += `- **감사:** ${document.getElementById("qThanks").value.trim() || "-"}\n`;
+    md += `- **내일:** ${document.getElementById("qTomorrow").value.trim() || "-"}\n\n`;
+    md += `**오늘 실천한 항목**\n`;
+
+    PRACTICES.forEach(p => {
+      const checkedTexts = [];
+      p.items.forEach((item, idx) => {
+        const cb = practicesContainer.querySelector(`input[data-key="${p.id}_${idx}"]`);
+        if (cb && cb.checked) checkedTexts.push(item);
+      });
+      if (checkedTexts.length) {
+        md += `- [${p.title}] ${checkedTexts.join(", ")}\n`;
+      }
+    });
+
+    navigator.clipboard.writeText(md).then(() => {
+      showToast("노션·메모장용 마크다운이 복사되었습니다.");
+    });
+  });
+
+  document.getElementById("saveRecordBtn").addEventListener("click", saveCurrentDate);
+  document.getElementById("resetTodayBtn").addEventListener("click", () => {
+    practicesContainer.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.checked = false;
+      cb.closest(".check-item").classList.remove("checked");
+    });
+    ["qLearn", "qGrow", "qThanks", "qTomorrow"].forEach(id => document.getElementById(id).value = "");
+    updateProgress();
+    showToast("입력란을 초기화했습니다.");
+  });
+
+  dateInput.addEventListener("change", () => loadDateData(dateInput.value));
+
+  // Modal controls
+  const modal = document.getElementById("principlesModal");
+  document.getElementById("openPrinciplesBtn").addEventListener("click", () => modal.classList.add("open"));
+  document.getElementById("closePrinciplesBtn").addEventListener("click", () => modal.classList.remove("open"));
+  modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+
+  // Init
+  renderPractices();
+  dateInput.value = getTodayStr();
+  loadDateData(dateInput.value);
+  renderHistory();
+</script>
+</body>
+</html>
